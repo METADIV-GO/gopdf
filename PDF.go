@@ -76,6 +76,25 @@ func (p *PDF) WriteImage(imgSrc string, width float64, height float64) {
 	p.Engine.Image(imgSrc, p.PageMarginLeft, p.Engine.GetY(), width, height, true, "", 0, "")
 }
 
+func (p *PDF) WriteTable(cells []*Cell) {
+	numOfCells := len(cells)
+	widthOfCell := p.PageBodyWidth / float64(numOfCells)
+	for _, cell := range cells {
+		style := cell.Style
+		style.FontStyle.Setup(p)
+		style.SetupFillColor(p)
+		style.BorderStyle.SetupBorderColor(p)
+		p.Engine.CellFormat(
+			widthOfCell,
+			style.FontStyle.LineHeight,
+			cell.Text,
+			cell.Style.BorderStyle.BorderToEngineString(),
+			0,
+			cell.Style.ToAlignEngineString(),
+			cell.Style.FillColor != nil, 0, "")
+	}
+}
+
 func (p *PDF) LineBreak(style *FontStyle) {
 	if style == nil {
 		style = p.DefaultFontStyle
