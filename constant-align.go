@@ -1,14 +1,14 @@
 package gopdf
 
 const (
-	AlignLeft   = "left"
-	AlignCenter = "center"
-	AlignRight  = "right"
+	AlignLeft   = "L"
+	AlignCenter = "C"
+	AlignRight  = "R"
 )
 
 const (
-	AlignTop      = "top"
-	AlignMiddle   = "middle"
-	AlignBottom   = "bottom"
-	AlignBaseline = "baseline"
+	AlignTop      = "T"
+	AlignMiddle   = "M"
+	AlignBottom   = "B"
+	AlignBaseline = "A"
 )

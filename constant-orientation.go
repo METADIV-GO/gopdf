@@ -1,6 +1,6 @@
 package gopdf
 
 var (
-	OrientationPortrait  = "Portrait"
-	OrientationLandscape = "Landscape"
+	OrientationPortrait  = "P"
+	OrientationLandscape = "L"
 )
