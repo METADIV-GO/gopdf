@@ -149,6 +149,9 @@ func (p *PDF) ToBytes() []byte {
 
 func (p *PDF) initEngine(layout *PageLayout) {
 	p.Engine = gofpdf.New(layout.Orientation, "pt", layout.Paper, "")
+	if layout.PageMargin != nil {
+		p.Engine.SetMargins(layout.PageMargin.Left, layout.PageMargin.Top, layout.PageMargin.Right)
+	}
 }
 
 func (p *PDF) initDefaultFontStyle() {

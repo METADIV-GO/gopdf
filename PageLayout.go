@@ -10,6 +10,7 @@ func NewPageLayout(orientation, paper string) *PageLayout {
 type PageLayout struct {
 	Orientation string
 	Paper       string
+	PageMargin  *PageMargin
 }
 
 /*
