@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"strings"
 
 	"github.com/METADIV-GO/gopdf/ttf_bytes"
 	"github.com/jung-kurt/gofpdf"
@@ -66,7 +67,11 @@ func (p *PDF) WriteTextBox(text string, align string, style *FontStyle) {
 		style = p.DefaultFontStyle
 	}
 	style.Setup(p)
-	p.Engine.WriteAligned(0, style.LineHeight, text, p.processHAlign(align))
+	lines := strings.Split(text, "\n")
+	for i := range lines {
+		p.Engine.WriteAligned(0, style.LineHeight, lines[i], p.processHAlign(align))
+		p.LineBreak(style)
+	}
 }
 
 func (p *PDF) WriteImage(imgSrc string, width float64, height float64) {
