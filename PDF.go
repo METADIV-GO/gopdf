@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/METADIV-GO/gopdf/ttf_bytes"
+	"github.com/METADIV-GO/nanoid"
 	"github.com/jung-kurt/gofpdf"
 )
 
@@ -85,8 +86,9 @@ func (p *PDF) WriteImageBytes(imgBytes []byte, width float64, height float64, fl
 	if width == 0 {
 		width = p.PageBodyWidth
 	}
-	p.Engine.RegisterImageOptionsReader("image", gofpdf.ImageOptions{ImageType: "png"}, bytes.NewReader(imgBytes))
-	p.Engine.Image("image", p.PageMarginLeft, p.Engine.GetY(), width, height, flow, "", 0, "")
+	name := nanoid.NewSafe()
+	p.Engine.RegisterImageOptionsReader(name, gofpdf.ImageOptions{ImageType: "png"}, bytes.NewReader(imgBytes))
+	p.Engine.Image(name, p.PageMarginLeft, p.Engine.GetY(), width, height, flow, "", 0, "")
 }
 
 func (p *PDF) WriteTable(cells []*Cell, pending *Pending) {
