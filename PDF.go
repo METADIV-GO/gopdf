@@ -74,19 +74,19 @@ func (p *PDF) WriteTextBox(text string, align string, style *FontStyle) {
 	}
 }
 
-func (p *PDF) WriteImage(imgSrc string, width float64, height float64) {
+func (p *PDF) WriteImage(imgSrc string, width float64, height float64, flow bool) {
 	if width == 0 {
 		width = p.PageBodyWidth
 	}
-	p.Engine.Image(imgSrc, p.PageMarginLeft, p.Engine.GetY(), width, height, true, "", 0, "")
+	p.Engine.Image(imgSrc, p.PageMarginLeft, p.Engine.GetY(), width, height, flow, "", 0, "")
 }
 
-func (p *PDF) WriteImageBytes(imgBytes []byte, width float64, height float64) {
+func (p *PDF) WriteImageBytes(imgBytes []byte, width float64, height float64, flow bool) {
 	if width == 0 {
 		width = p.PageBodyWidth
 	}
 	p.Engine.RegisterImageOptionsReader("image", gofpdf.ImageOptions{ImageType: "png"}, bytes.NewReader(imgBytes))
-	p.Engine.Image("image", p.PageMarginLeft, p.Engine.GetY(), width, height, true, "", 0, "")
+	p.Engine.Image("image", p.PageMarginLeft, p.Engine.GetY(), width, height, flow, "", 0, "")
 }
 
 func (p *PDF) WriteTable(cells []*Cell, pending *Pending) {
