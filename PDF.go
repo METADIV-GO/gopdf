@@ -169,7 +169,7 @@ func (p *PDF) initPageBodySize() {
 }
 
 func (p *PDF) processLayoutOpts(layout ...*PageLayout) *PageLayout {
-	if len(layout) == 0 {
+	if len(layout) == 0 || layout[0] == nil {
 		return NewPageLayout(OrientationPortrait, PaperA4)
 	}
 	return layout[0]
