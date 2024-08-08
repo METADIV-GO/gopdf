@@ -155,7 +155,11 @@ func (p *PDF) initEngine(layout *PageLayout) {
 }
 
 func (p *PDF) initDefaultFontStyle() {
-	p.DefaultFontStyle = NewFontStyle("", 0, 0, nil, false, false, false)
+	if p.PageLayout.DefaultFontStyle == nil {
+		p.DefaultFontStyle = NewFontStyle("", 0, 0, nil, false, false, false)
+	} else {
+		p.DefaultFontStyle = p.PageLayout.DefaultFontStyle
+	}
 }
 
 func (p *PDF) initPageBodySize() {
