@@ -76,9 +76,27 @@ func (p *PDF) WriteImage(imgSrc string, width float64, height float64) {
 	p.Engine.Image(imgSrc, p.PageMarginLeft, p.Engine.GetY(), width, height, true, "", 0, "")
 }
 
-func (p *PDF) WriteTable(cells []*Cell) {
+func (p *PDF) WriteTable(cells []*Cell, pending *Pending) {
+
+	if pending != nil {
+		if pending.Top > 0 {
+			p.Engine.Ln(pending.Top)
+		}
+		if pending.Left > 0 {
+			p.Engine.SetX(p.PageMarginLeft + pending.Left)
+		}
+	}
+
+	pageBodyWidth := p.PageBodyWidth
+	if pending != nil && pending.Right > 0 {
+		pageBodyWidth -= pending.Right
+	}
+	if pending != nil && pending.Left > 0 {
+		pageBodyWidth -= pending.Left
+	}
 	numOfCells := len(cells)
-	widthOfCell := p.PageBodyWidth / float64(numOfCells)
+	widthOfCell := pageBodyWidth / float64(numOfCells)
+
 	for _, cell := range cells {
 		style := cell.Style
 		style.FontStyle.Setup(p)
@@ -92,6 +110,9 @@ func (p *PDF) WriteTable(cells []*Cell) {
 			0,
 			cell.Style.ToAlignEngineString(),
 			cell.Style.FillColor != nil, 0, "")
+	}
+	if pending != nil && pending.Bottom > 0 {
+		p.Engine.Ln(pending.Bottom)
 	}
 }
 
