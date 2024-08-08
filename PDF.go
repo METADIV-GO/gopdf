@@ -85,7 +85,7 @@ func (p *PDF) WriteImageBytes(imgBytes []byte, width float64, height float64) {
 	if width == 0 {
 		width = p.PageBodyWidth
 	}
-	p.Engine.RegisterImageReader("image", "", bytes.NewReader(imgBytes))
+	p.Engine.RegisterImageOptionsReader("image", gofpdf.ImageOptions{ImageType: "png"}, bytes.NewReader(imgBytes))
 	p.Engine.Image("image", p.PageMarginLeft, p.Engine.GetY(), width, height, true, "", 0, "")
 }
 
