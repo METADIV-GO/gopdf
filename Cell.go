@@ -1,8 +1,10 @@
 package gopdf
 
-func NewCell(text string, style *CellStyle) *Cell {
+func NewCell(text string, style *CellStyle, width float64, widthPercentage float64) *Cell {
 	c := &Cell{
-		Text: text,
+		Text:         text,
+		Width:        width,
+		WidthPercent: widthPercentage,
 	}
 	c.SetStyle(style)
 	return c
