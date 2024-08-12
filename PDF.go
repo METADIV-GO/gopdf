@@ -111,15 +111,19 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 	}
 
 	var emptyWidth int
+	var usedWidth float64
 	for i := range cells {
 		if cells[i].Width == 0 && cells[i].WidthPercent == 0 {
 			emptyWidth++
 		} else if cells[i].WidthPercent > 0 && cells[i].Width == 0 {
 			cells[i].Width = pageBodyWidth * cells[i].WidthPercent
+			usedWidth += cells[i].Width
+		} else {
+			usedWidth += cells[i].Width
 		}
 	}
 
-	widthOfCell := pageBodyWidth / float64(len(cells)-emptyWidth)
+	widthOfCell := (pageBodyWidth - usedWidth) / float64(emptyWidth)
 	for i := range cells {
 		if cells[i].Width == 0 {
 			cells[i].Width = widthOfCell
