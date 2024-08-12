@@ -9,8 +9,10 @@ func NewCell(text string, style *CellStyle) *Cell {
 }
 
 type Cell struct {
-	Text  string     `json:"text"`
-	Style *CellStyle `json:"style"`
+	Text         string     `json:"text"`
+	Style        *CellStyle `json:"style"`
+	Width        float64    `json:"width"`
+	WidthPercent float64    `json:"width_percent"`
 }
 
 func (c *Cell) SetStyle(style *CellStyle) {

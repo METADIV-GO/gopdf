@@ -109,8 +109,22 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 	if padding != nil && padding.Left > 0 {
 		pageBodyWidth -= padding.Left
 	}
-	numOfCells := len(cells)
-	widthOfCell := pageBodyWidth / float64(numOfCells)
+
+	var emptyWidth int
+	for i := range cells {
+		if cells[i].Width == 0 && cells[i].WidthPercent == 0 {
+			emptyWidth++
+		} else if cells[i].WidthPercent > 0 && cells[i].Width == 0 {
+			cells[i].Width = pageBodyWidth * cells[i].WidthPercent
+		}
+	}
+
+	widthOfCell := pageBodyWidth / float64(len(cells)-emptyWidth)
+	for i := range cells {
+		if cells[i].Width == 0 {
+			cells[i].Width = widthOfCell
+		}
+	}
 
 	for _, cell := range cells {
 		style := cell.Style
@@ -118,7 +132,7 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		style.SetupFillColor(p)
 		style.BorderStyle.SetupBorderColor(p)
 		p.Engine.CellFormat(
-			widthOfCell,
+			cell.Width,
 			style.FontStyle.LineHeight,
 			cell.Text,
 			cell.Style.BorderStyle.BorderToEngineString(),
