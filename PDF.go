@@ -91,23 +91,23 @@ func (p *PDF) WriteImageBytes(imgBytes []byte, width float64, height float64, fl
 	p.Engine.Image(name, p.PageMarginLeft, p.Engine.GetY(), width, height, flow, "", 0, "")
 }
 
-func (p *PDF) WriteTable(cells []*Cell, pending *Pending) {
+func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 
-	if pending != nil {
-		if pending.Top > 0 {
-			p.Engine.Ln(pending.Top)
+	if padding != nil {
+		if padding.Top > 0 {
+			p.Engine.Ln(padding.Top)
 		}
-		if pending.Left > 0 {
-			p.Engine.SetX(p.PageMarginLeft + pending.Left)
+		if padding.Left > 0 {
+			p.Engine.SetX(p.PageMarginLeft + padding.Left)
 		}
 	}
 
 	pageBodyWidth := p.PageBodyWidth
-	if pending != nil && pending.Right > 0 {
-		pageBodyWidth -= pending.Right
+	if padding != nil && padding.Right > 0 {
+		pageBodyWidth -= padding.Right
 	}
-	if pending != nil && pending.Left > 0 {
-		pageBodyWidth -= pending.Left
+	if padding != nil && padding.Left > 0 {
+		pageBodyWidth -= padding.Left
 	}
 	numOfCells := len(cells)
 	widthOfCell := pageBodyWidth / float64(numOfCells)
@@ -126,8 +126,8 @@ func (p *PDF) WriteTable(cells []*Cell, pending *Pending) {
 			cell.Style.ToAlignEngineString(),
 			cell.Style.FillColor != nil, 0, "")
 	}
-	if pending != nil && pending.Bottom > 0 {
-		p.Engine.Ln(pending.Bottom)
+	if padding != nil && padding.Bottom > 0 {
+		p.Engine.Ln(padding.Bottom)
 	}
 }
 

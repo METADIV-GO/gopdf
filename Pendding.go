@@ -1,7 +1,7 @@
 package gopdf
 
-func NewPending(top, left, right, bottom float64) *Pending {
-	return &Pending{
+func NewPadding(top, left, right, bottom float64) *Padding {
+	return &Padding{
 		Top:    top,
 		Left:   left,
 		Right:  right,
@@ -9,7 +9,7 @@ func NewPending(top, left, right, bottom float64) *Pending {
 	}
 }
 
-type Pending struct {
+type Padding struct {
 	Top    float64 `json:"top"`
 	Left   float64 `json:"left"`
 	Right  float64 `json:"right"`
