@@ -16,14 +16,14 @@ func NewPage(pdf *PDF) *Page {
 }
 
 type Page struct {
-	PageLayout *PageLayout
+	PageLayout *PageLayout `json:"page_layout"`
 
-	PageHeight       float64
-	PageWidth        float64
-	PageMarginTop    float64
-	PageMarginBottom float64
-	PageMarginLeft   float64
-	PageMarginRight  float64
-	PageBodyHeight   float64
-	PageBodyWidth    float64
+	PageHeight       float64 `json:"page_height"`
+	PageWidth        float64 `json:"page_width"`
+	PageMarginTop    float64 `json:"page_margin_top"`
+	PageMarginBottom float64 `json:"page_margin_bottom"`
+	PageMarginLeft   float64 `json:"page_margin_left"`
+	PageMarginRight  float64 `json:"page_margin_right"`
+	PageBodyHeight   float64 `json:"page_body_height"`
+	PageBodyWidth    float64 `json:"page_body_width"`
 }

@@ -9,7 +9,7 @@ func NewRGB(r, g, b int) *RGB {
 }
 
 type RGB struct {
-	R int
-	G int
-	B int
+	R int `json:"r"`
+	G int `json:"g"`
+	B int `json:"b"`
 }

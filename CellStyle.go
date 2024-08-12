@@ -11,11 +11,11 @@ func NewCellStyle(fontStyle *FontStyle, borderStyle *BorderStyle, fillColor *RGB
 }
 
 type CellStyle struct {
-	FontStyle   *FontStyle
-	BorderStyle *BorderStyle
-	FillColor   *RGB
-	HAlign      string
-	VAlign      string
+	FontStyle   *FontStyle   `json:"font_style"`
+	BorderStyle *BorderStyle `json:"border_style"`
+	FillColor   *RGB         `json:"fill_color"`
+	HAlign      string       `json:"h_align"`
+	VAlign      string       `json:"v_align"`
 }
 
 func (s *CellStyle) SetFontStyle(style *FontStyle) {

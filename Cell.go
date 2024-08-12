@@ -9,8 +9,8 @@ func NewCell(text string, style *CellStyle) *Cell {
 }
 
 type Cell struct {
-	Text  string
-	Style *CellStyle
+	Text  string     `json:"text"`
+	Style *CellStyle `json:"style"`
 }
 
 func (c *Cell) SetStyle(style *CellStyle) {

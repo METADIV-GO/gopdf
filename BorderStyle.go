@@ -11,11 +11,11 @@ func NewBorderStyle(top, left, right, bottom bool, color *RGB) *BorderStyle {
 }
 
 type BorderStyle struct {
-	Top    bool
-	Left   bool
-	Right  bool
-	Bottom bool
-	Color  *RGB
+	Top    bool `json:"top"`
+	Left   bool `json:"left"`
+	Right  bool `json:"right"`
+	Bottom bool `json:"bottom"`
+	Color  *RGB `json:"color"`
 }
 
 func (s *BorderStyle) SetupBorderColor(p *PDF) {

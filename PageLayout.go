@@ -8,10 +8,10 @@ func NewPageLayout(orientation, paper string) *PageLayout {
 }
 
 type PageLayout struct {
-	Orientation      string
-	Paper            string
-	PageMargin       *PageMargin
-	DefaultFontStyle *FontStyle
+	Orientation      string      `json:"orientation"`
+	Paper            string      `json:"paper"`
+	PageMargin       *PageMargin `json:"page_margin"`
+	DefaultFontStyle *FontStyle  `json:"default_font_style"`
 }
 
 /*

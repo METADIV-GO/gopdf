@@ -19,13 +19,13 @@ func NewFontStyle(
 }
 
 type FontStyle struct {
-	FontFamily string
-	FontSize   float64
-	LineHeight float64
-	FontColor  *RGB
-	Bold       bool
-	Strikeout  bool
-	Underline  bool
+	FontFamily string  `json:"font_family"`
+	FontSize   float64 `json:"font_size"`
+	LineHeight float64 `json:"line_height"`
+	FontColor  *RGB    `json:"font_color"`
+	Bold       bool    `json:"bold"`
+	Strikeout  bool    `json:"strikeout"`
+	Underline  bool    `json:"underline"`
 }
 
 /*

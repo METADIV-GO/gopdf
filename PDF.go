@@ -24,19 +24,19 @@ func New(layout ...*PageLayout) *PDF {
 }
 
 type PDF struct {
-	Engine           *gofpdf.Fpdf
-	PageLayout       *PageLayout
-	DefaultFontStyle *FontStyle
-	CurrentPageIndex int
+	Engine           *gofpdf.Fpdf `json:"-"`
+	PageLayout       *PageLayout  `json:"page_layout"`
+	DefaultFontStyle *FontStyle   `json:"default_font_style"`
+	CurrentPageIndex int          `json:"-"`
 
-	PageHeight       float64
-	PageWidth        float64
-	PageMarginTop    float64
-	PageMarginBottom float64
-	PageMarginLeft   float64
-	PageMarginRight  float64
-	PageBodyHeight   float64 // Page height minus top and bottom margins
-	PageBodyWidth    float64 // Page width minus left and right margins
+	PageHeight       float64 `json:"page_height"`
+	PageWidth        float64 `json:"page_width"`
+	PageMarginTop    float64 `json:"page_margin_top"`
+	PageMarginBottom float64 `json:"page_margin_bottom"`
+	PageMarginLeft   float64 `json:"page_margin_left"`
+	PageMarginRight  float64 `json:"page_margin_right"`
+	PageBodyHeight   float64 `json:"page_body_height"` // Page height minus top and bottom margins
+	PageBodyWidth    float64 `json:"page_body_width"`  // Page width minus left and right margins
 }
 
 func (p *PDF) AddPage() {

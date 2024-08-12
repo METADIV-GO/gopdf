@@ -10,8 +10,8 @@ func NewPageMargin(top, left, right, bottom float64) *PageMargin {
 }
 
 type PageMargin struct {
-	Top    float64
-	Left   float64
-	Right  float64
-	Bottom float64
+	Top    float64 `json:"top"`
+	Left   float64 `json:"left"`
+	Right  float64 `json:"right"`
+	Bottom float64 `json:"bottom"`
 }
