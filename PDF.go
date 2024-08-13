@@ -140,7 +140,7 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 
 	for i := range cells {
 		count := strings.Count(cells[i].Text, "\n")
-		for j := 0; j < countLineBreak-count; j++ {
+		for j := 0; j <= countLineBreak-count; j++ {
 			cells[i].Text += "\n"
 		}
 	}
