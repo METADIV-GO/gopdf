@@ -166,7 +166,6 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		p.Engine.SetY(y)
 		p.Engine.SetX(x + cell.Width)
 	}
-	p.Engine.SetY(maxY)
 	if padding != nil && padding.Bottom > 0 {
 		p.Engine.Ln(padding.Bottom)
 	}
