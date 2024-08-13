@@ -130,6 +130,21 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		}
 	}
 
+	var countLineBreak int
+	for i := range cells {
+		count := strings.Count(cells[i].Text, "\n")
+		if count > countLineBreak {
+			countLineBreak = count
+		}
+	}
+
+	for i := range cells {
+		count := strings.Count(cells[i].Text, "\n")
+		for j := 0; j < countLineBreak-count; j++ {
+			cells[i].Text += "\n"
+		}
+	}
+
 	y := p.Engine.GetY()
 	maxY := y
 	for _, cell := range cells {
