@@ -137,6 +137,7 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		style.FontStyle.Setup(p)
 		style.SetupFillColor(p)
 		style.BorderStyle.SetupBorderColor(p)
+		x := p.Engine.GetX()
 		p.Engine.MultiCell(
 			cell.Width,
 			style.FontStyle.LineHeight,
@@ -148,6 +149,7 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 			maxY = p.Engine.GetY()
 		}
 		p.Engine.SetY(y)
+		p.Engine.SetX(x + cell.Width)
 	}
 	p.Engine.SetY(maxY)
 	if padding != nil && padding.Bottom > 0 {
