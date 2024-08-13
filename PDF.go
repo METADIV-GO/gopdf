@@ -130,7 +130,6 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		}
 	}
 
-	x := p.Engine.GetX()
 	y := p.Engine.GetY()
 	maxY := y
 	for _, cell := range cells {
@@ -148,7 +147,7 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		if p.Engine.GetY() > maxY {
 			maxY = p.Engine.GetY()
 		}
-		p.Engine.SetXY(x+cell.Width, y)
+		p.Engine.SetY(y)
 	}
 	p.Engine.SetY(maxY)
 	if padding != nil && padding.Bottom > 0 {
