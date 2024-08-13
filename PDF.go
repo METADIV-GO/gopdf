@@ -135,14 +135,13 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 		style.FontStyle.Setup(p)
 		style.SetupFillColor(p)
 		style.BorderStyle.SetupBorderColor(p)
-		p.Engine.CellFormat(
+		p.Engine.MultiCell(
 			cell.Width,
 			style.FontStyle.LineHeight,
 			cell.Text,
 			cell.Style.BorderStyle.BorderToEngineString(),
-			0,
 			cell.Style.ToAlignEngineString(),
-			cell.Style.FillColor != nil, 0, "")
+			cell.Style.FillColor != nil)
 	}
 	if padding != nil && padding.Bottom > 0 {
 		p.Engine.Ln(padding.Bottom)
