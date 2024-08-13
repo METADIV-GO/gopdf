@@ -132,6 +132,8 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 
 	var countLineBreak int
 	for i := range cells {
+		cells[i].Text = strings.TrimSpace(cells[i].Text)
+		cells[i].Text = strings.TrimRight(cells[i].Text, "\n")
 		count := strings.Count(cells[i].Text, "\n")
 		if count > countLineBreak {
 			countLineBreak = count
@@ -140,8 +142,8 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 
 	for i := range cells {
 		count := strings.Count(cells[i].Text, "\n")
-		for j := 0; j <= countLineBreak-count; j++ {
-			cells[i].Text += "\n"
+		for j := 0; j < countLineBreak-count; j++ {
+			cells[i].Text += "\n "
 		}
 	}
 
@@ -161,11 +163,13 @@ func (p *PDF) WriteTable(cells []*Cell, padding *Padding) {
 			cell.Style.ToAlignEngineString(),
 			cell.Style.FillColor != nil)
 		if p.Engine.GetY() > maxY {
-			maxY = p.Engine.GetY()
+			maxY = p.Engine.GetY() - style.FontStyle.LineHeight
 		}
 		p.Engine.SetY(y)
 		p.Engine.SetX(x + cell.Width)
 	}
+	p.Engine.SetX(p.PageMarginLeft)
+	p.Engine.SetY(maxY)
 	if padding != nil && padding.Bottom > 0 {
 		p.Engine.Ln(padding.Bottom)
 	}
