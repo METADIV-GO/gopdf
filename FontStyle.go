@@ -42,6 +42,7 @@ func (s *FontStyle) Setup(pdf *PDF) {
 	if s.Underline {
 		styleStr += "U"
 	}
+	pdf.Engine.SetTextColor(s.FontColor.R, s.FontColor.G, s.FontColor.B)
 	pdf.Engine.SetFont(s.FontFamily, styleStr, s.FontSize)
 }
 
